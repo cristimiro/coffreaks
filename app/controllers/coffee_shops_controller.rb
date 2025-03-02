@@ -3,7 +3,9 @@ class CoffeeShopsController < ApplicationController
 
   # GET /coffee_shops/nearby
   def nearby
-    render json: { message: "Success" }
+    response = NearbyCoffeeShops.call(lat: permitted_params[:x].to_f, long: permitted_params[:y].to_f)
+
+    render json: response.as_json
   end
 
   private
