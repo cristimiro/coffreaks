@@ -106,6 +106,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.2)
     io-console (0.8.0)
     irb (1.15.1)
       pp (>= 0.6.0)
@@ -345,6 +346,7 @@ DEPENDENCIES
   brakeman
   byebug
   debug
+  interactor
   kamal
   puma (>= 5.0)
   rack-cors
