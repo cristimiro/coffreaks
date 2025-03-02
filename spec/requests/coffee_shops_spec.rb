@@ -10,10 +10,10 @@ RSpec.describe "CoffeeShopsController", type: :request do
       # validates both float and integer input with same test
       let(:params) { { x: "45.0", y: "45" } }
 
-      it "returns success message" do
+      it "returns closest 3 coffee shops" do
         expect(response).to have_http_status(:ok)
         json = JSON.parse(response.body)
-        expect(json["message"]).to eq("Success")
+        expect(json.size).to eq(3)
       end
     end
 
