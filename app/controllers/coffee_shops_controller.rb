@@ -3,7 +3,7 @@ class CoffeeShopsController < ApplicationController
 
   # GET /coffee_shops/nearby
   def nearby
-    render json: { message: "Return" }
+    render json: { message: "Success" }
   end
 
   private
