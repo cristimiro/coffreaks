@@ -2,30 +2,50 @@
 
 module Types
   class QueryType < Types::BaseObject
-    field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
-      argument :id, ID, required: true, description: "ID of the object."
+    field :coffee_shops, [CoffeeShopType], null: false do
+      argument :user_location, Types::LocationInput, required: false
+      argument :name, String, required: false
     end
 
-    def node(id:)
-      context.schema.object_from_id(id, context)
-    end
-
-    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
-    end
-
-    def nodes(ids:)
-      ids.map { |id| context.schema.object_from_id(id, context) }
-    end
-
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    def coffee_shops(user_location: nil, name: "")
+      [
+        {
+          id: 1,
+          name: "CoffeShop Sibiu",
+          nearby: true,
+          shop_details: "Calea Cisnadiei 15, opens at 8 PM"
+        },
+        {
+          id: 2,
+          name: "CoffeShop - default",
+          nearby: false,
+          shop_details: "Calea Poplacii 15, opens at 8 PM"
+        },
+        {
+          id: 3,
+          name: "CoffeShop - alt nume",
+          nearby: true,
+          shop_details: "Calea Victoriei 15, opens at 8 PM"
+        },
+        {
+          id: 4,
+          name: "CoffeShop - bla bla",
+          nearby: false,
+          shop_details: "Milea 15, opens at 9 PM"
+        },
+        {
+          id: 5,
+          name: "CoffeShop Name - test",
+          nearby: false,
+          shop_details: "Selimbar 15, opens at 8 PM"
+        },
+        {
+          id: 6,
+          name: "CoffeShop Name - Centru",
+          nearby: true,
+          shop_details: "Nicolae Blacescu 15, opens at 10 PM"
+        }
+      ]
     end
   end
 end
