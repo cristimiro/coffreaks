@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Types::CoffeeShopType do
+RSpec.describe Public::Types::CoffeeShopType do
   it 'has the expected fields' do
     expect(described_class).to have_field(:id).of_type('ID!')
     expect(described_class).to have_field(:name).of_type('String!')
