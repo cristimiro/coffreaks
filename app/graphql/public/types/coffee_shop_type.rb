@@ -2,9 +2,7 @@
 
 module Public
   module Types
-    class CoffeeShopType < ::Types::BaseObject
-      field :id, ID, null: false
-      field :name, String, null: false
+    class CoffeeShopType < ::Types::CoffeeShopBaseType
       field :nearby, Boolean
       field :shop_details, String, null: false
 
