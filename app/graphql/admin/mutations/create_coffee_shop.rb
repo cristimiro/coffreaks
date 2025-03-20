@@ -11,14 +11,18 @@ module Admin
       field :coffee_shop, Types::CoffeeShopType
 
       def resolve(name:, lat:, long:, address:, start_time:, end_time:)
-        coffee_shop = {
+        coffee_shop = CoffeeShop.new(
           name: name,
           lat: lat,
           long: long,
           address: address,
           start_time: start_time,
           end_time: end_time
-        }
+        )
+
+        raise GraphQL::ExecutionError, coffee_shop.errors.full_messages.join(", ") unless coffee_shop.valid?
+
+        coffee_shop.save
 
         {
           coffee_shop: coffee_shop
