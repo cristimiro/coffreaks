@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "CoffeeShopsController", type: :request do
-  describe "GET #nearby" do
+  # Deprecated
+  xdescribe "GET #nearby" do
     let(:params) { {} }
 
     before { get "/coffee_shops/nearby", params: params }

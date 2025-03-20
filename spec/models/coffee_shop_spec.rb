@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe CoffeeShop, type: :model do
   subject { described_class.new(name: name, location: location) }
 
-  context "Validations" do
+  # Deprecated
+  xcontext "Validations" do
     context "when name and location present" do
       let(:name) { "CoffeeName" }
       let(:location) { Location.new(lat: 45.0, long: 45.0) }

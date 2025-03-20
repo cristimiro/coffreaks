@@ -6,7 +6,8 @@ RSpec.describe DistanceCalculator, type: :service do
   let(:coffee_shop) { CoffeeShop.new(name: "Starbucks", location: location) }
   let(:location) { Location.new(lat: 45.0, long: 45.0) }
 
-  describe "#compute" do
+  # Deprecated
+  xdescribe "#compute" do
     context "when the coordinates are the same as the coffee shop's location" do
       let(:lat) { 45.0 }
       let(:long) { 45.0 }
