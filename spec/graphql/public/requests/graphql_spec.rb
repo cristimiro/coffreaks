@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'GraphQL API', type: :request do
+RSpec.describe 'Public GraphQL API', type: :request do
   # TODO add Fabricator for CoffeeShope once working with real data
-  subject(:request) { post '/graphql', params: { query: query } }
+  subject(:request) { post '/graphql/public', params: { query: query } }
   let(:query) do
     <<~GQL
       query {

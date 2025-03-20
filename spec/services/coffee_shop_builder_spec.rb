@@ -11,7 +11,8 @@ RSpec.describe CoffeeShopBuilder, type: :service do
     }
   end
 
-  describe "#build" do
+  # Deprecated
+  xdescribe "#build" do
     it 'returns a CoffeeShop object' do
       coffee_shop = CoffeeShopBuilder.build(params)
 

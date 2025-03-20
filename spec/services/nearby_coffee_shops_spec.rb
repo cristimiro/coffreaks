@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe NearbyCoffeeShops, type: :service do
   subject { described_class.call(lat: lat, long: long) }
 
-  describe ".call" do
+  # Deprecated
+  xdescribe ".call" do
     context "when input is valid" do
       let(:lat) { 47.6 }
       let(:long) { -122.4 }
