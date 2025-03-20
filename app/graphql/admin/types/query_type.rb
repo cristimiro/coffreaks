@@ -8,17 +8,12 @@ module Admin
       end
 
       def coffee_shops(name: "")
-        [
-          {
-            id: 1,
-            name: "CoffeShop Sibiu",
-            lat: 90.0,
-            long: 90.0,
-            address: "Calea poplacii",
-            start_time: "09:00",
-            end_time: "21:00"
-          }
-        ]
+        unless name.blank?
+          filtered_shop = CoffeeShop.find_by(name: name)
+          return filtered_shop.nil? ? [] : [filtered_shop]
+        end
+
+        CoffeeShop.all
       end
     end
   end
