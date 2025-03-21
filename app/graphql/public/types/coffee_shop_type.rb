@@ -6,9 +6,8 @@ module Public
       field :nearby, Boolean
       field :shop_details, String, null: false
 
-      # def shop_details
-      #   "#{object.location.address}, open until #{object.close_at}"
-      # end
+      delegate :shop, to: :object
+      delegate :id, :name, to: :shop
     end
   end
 end
