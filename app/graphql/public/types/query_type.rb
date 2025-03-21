@@ -9,44 +9,45 @@ module Public
       end
 
       def coffee_shops(user_location: nil, name: "")
-        [
-          {
-            id: 1,
-            name: "CoffeShop Sibiu",
-            nearby: true,
-            shop_details: "Calea Cisnadiei 15, opens at 8 PM"
-          },
-          {
-            id: 2,
-            name: "CoffeShop - default",
-            nearby: false,
-            shop_details: "Calea Poplacii 15, opens at 8 PM"
-          },
-          {
-            id: 3,
-            name: "CoffeShop - alt nume",
-            nearby: true,
-            shop_details: "Calea Victoriei 15, opens at 8 PM"
-          },
-          {
-            id: 4,
-            name: "CoffeShop - bla bla",
-            nearby: false,
-            shop_details: "Milea 15, opens at 9 PM"
-          },
-          {
-            id: 5,
-            name: "CoffeShop Name - test",
-            nearby: false,
-            shop_details: "Selimbar 15, opens at 8 PM"
-          },
-          {
-            id: 6,
-            name: "CoffeShop Name - Centru",
-            nearby: true,
-            shop_details: "Nicolae Blacescu 15, opens at 10 PM"
-          }
-        ]
+        filtered_coffee_shops = filter_coffee_shops_by_name(name: name)
+
+        # TODO: Move upcoming logic and methods to service
+        coffee_shops = []
+        filtered_coffee_shops.each_with_index do |shop, index|
+          coffee_shops << Presenters::CoffeeShopPresenter.new(
+            shop,
+            nearby: index < 3,
+            shop_details: compute_shop_details_message(shop.address, shop.start_time, shop.end_time)
+          )
+        end
+
+        coffee_shops
+      end
+
+      private
+
+      def filter_coffee_shops_by_name(name:)
+        unless name.blank?
+          filtered_shop = CoffeeShop.find_by(name: name)
+          return filtered_shop.nil? ? [] : [filtered_shop]
+        end
+
+        CoffeeShop.all
+      end
+
+      def compute_shop_details_message(address, start_time, end_time)
+        details = "#{address}, "
+        details.concat(shop_schedule_interval(start_time.to_time, end_time.to_time))
+      end
+
+      def shop_schedule_interval(start_time, end_time)
+        if Time.current < start_time
+          "opens at #{start_time.strftime('%I:%M %p')}"
+        elsif (start_time..end_time).member?(Time.current)
+          "open until #{end_time.strftime('%I:%M %p')}"
+        else
+          "opens tomorrow at #{start_time.strftime('%I:%M %p')}"
+        end
       end
     end
   end
